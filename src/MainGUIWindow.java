@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +12,7 @@ public class MainGUIWindow extends JFrame {
     private JTextArea noteTextArea;
     private JLabel title;
     private Map<String, String> notesMap;
-    private JPanel West;
+    private JPanel CenterPanel;
 
     public MainGUIWindow() {
         notesMap = new HashMap<>();
@@ -27,6 +28,9 @@ public class MainGUIWindow extends JFrame {
         title.setForeground(new Color(0));
         title.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
+        CenterPanel = new JPanel();
+        CenterPanel.setLayout(new BorderLayout());
+
         JButton addButton = new JButton("Add Note");
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -34,8 +38,10 @@ public class MainGUIWindow extends JFrame {
                 openNotesWindow();
             }
         });
-        mainFrame.add(addButton, BorderLayout.WEST);
+        mainFrame.add(CenterPanel, BorderLayout.CENTER);
+        CenterPanel.add(addButton, BorderLayout.WEST);
         mainFrame.add(title, BorderLayout.NORTH);
+
 
         JButton viewButton = new JButton("View Notes");
         viewButton.addActionListener(new ActionListener() {
@@ -44,7 +50,7 @@ public class MainGUIWindow extends JFrame {
                 viewNotes();
             }
         });
-        mainFrame.add(viewButton, BorderLayout.EAST);
+        CenterPanel.add(viewButton, BorderLayout.EAST);
 
         mainFrame.setSize(500, 500);
         mainFrame.setVisible(true);
